@@ -15,9 +15,23 @@ app.get('/', (req, res) => {
     // Send Hello World
     res.send('Welcome to APP Express + TS +Swagger + Mongoose-----');
 });
-app.get('/hello', (req, res) => {
+app.get('/hello/:name', (req, res) => {
     // Send Hello World
-    res.send('Hello World');
+    const data = {
+        data: {
+            message: `Hello, ${req.params.name ? req.params.name : 'anonymous'}.`
+        }
+    };
+    res.send(data.data.message);
+});
+app.get('/goodbye', (req, res) => {
+    const data = {
+        data: {
+            message: "Goodbye, world",
+        }
+    };
+    res.send(data);
+    res.sendStatus(200).json();
 });
 // Execute APP and Listen Request to PORT
 app.listen(port, () => {
